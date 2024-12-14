@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock</title>
+
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.5s ease;
+    }
+
+    .clock-container {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      border: 2px solid burlywood;
+      padding: 30px;
+    }
+
+    .clock-text {
+      font-size: 40px;
+      font-weight: bold;
+      color: aqua;
+    }
+
+    h1 {
+      font-size: 4rem;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div class="clock-container">
+      <p class="clock-text">Clock</p>
+      <h1 id="clock"></h1>
+    </div>
+  </div>
+
+  <script>document.addEventListener("DOMContentLoaded", () => {
+      const clock = document.getElementById("clock");
+      const updateClock = () => {
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const isAM = hours < 12;
+        hours = hours % 12 || 12;
+        clock.textContent = `${hours}:${minutes}:${seconds} ${isAM ? "AM" : "PM"}`;
+        document.body.style.backgroundColor = isAM && hours >= 6 ? "#FFEB3B" : "#1E3A8A";
+      };
+      setInterval(updateClock, 1000);
+      updateClock();
+    });
+  </script>
+</body>
+
+</html>
